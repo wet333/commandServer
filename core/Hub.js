@@ -1,6 +1,7 @@
 const vm = require('vm');
 var fs = require("fs");
 const { Endpoint } = require('./../core/Endpoint.js');
+const parseInput = require('./parseInput.js');
 
 // Constructor
 function Hub() {
@@ -21,7 +22,7 @@ Hub.create = () => {
 
 Hub.process = (data, socket) => {
 
-    data = data.split(" ");
+    data = parseInput(data);
     console.log(data);
     socket.write("ping");
 
@@ -42,6 +43,10 @@ Hub.loadEndpoints = () => {
     })
 
     console.log(endpoints);
+}
+
+Hub.parseData = (data) => {
+
 }
 
 exports.Hub = Hub;
